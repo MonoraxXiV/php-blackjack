@@ -21,6 +21,7 @@ if (isset($blackjack)){
 //initializing all the game components?
 
     $blackjack= new Blackjack();
+//argument problem, missing $deck in parameters
     $player= new Player();
 
 //checking for posts
@@ -48,7 +49,7 @@ if (isset ($_POST['surrender'])){
 </head>
 <body>
 <form action="index.php" method="post" >
-    <input type="button" name="hit" value="hit" onclick="<?php $player->hit(); ?>">
+    <input type="button" name="hit" value="hit" onclick="<?php $player->hit() ?>">
     <input type="button" name="stand" value="stand">
     <input type="button" name="surrender" value="surrender">
 
