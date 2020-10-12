@@ -1,7 +1,5 @@
 <?php
 declare(strict_types=1);
-require 'player.php';
-require 'Deck.php';
 
 class Blackjack {
     private  $player;
@@ -16,7 +14,7 @@ class Blackjack {
     public function getDealer(){
 
     }
-    public function __construct($player, $dealer)
+    public function __construct()
     {
 
         // old attempt at Instantiate
