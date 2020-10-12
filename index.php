@@ -19,9 +19,10 @@ if (isset($blackjack)){
     $_SESSION['blackjackSes']=$blackjack;
 }
 //initializing all the game components?
-function game(){
+
     $blackjack= new Blackjack();
-}
+    $player= new Player();
+
 //checking for posts
 if (isset ($_POST['hit'])){
     echo "you hit";
@@ -47,9 +48,10 @@ if (isset ($_POST['surrender'])){
 </head>
 <body>
 <form action="index.php" method="post" >
-    <button type="button" name="hit">hit</button>
-    <button type="button" name="stand">stand</button>
-    <button type="button" name="surrender">surrender</button>
+    <input type="button" name="hit" value="hit" onclick="<?php $player->hit(); ?>">
+    <input type="button" name="stand" value="stand">
+    <input type="button" name="surrender" value="surrender">
+
 </form>
 </body>
 </html>
