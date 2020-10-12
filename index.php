@@ -1,12 +1,39 @@
 <?php
 declare(strict_types=1);
-session_start();
-$_SESSION['blackjackSes']=Blackjack::class;
+
 require 'blackjack.php';
 require 'Deck.php';
 require 'player.php';
 
+ini_set('display_errors', '1');
 
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+session_start();
+
+
+
+
+if (isset($blackjack)){
+    $_SESSION['blackjackSes']=$blackjack;
+}
+//initializing all the game components?
+function game(){
+    $blackjack= new Blackjack();
+}
+//checking for posts
+if (isset ($_POST['hit'])){
+    echo "you hit";
+}
+
+if (isset ($_POST['stand'])){
+    echo "you stand";
+}
+
+if (isset ($_POST['surrender'])){
+ echo "dealer wins";
+}
 
 ?>
 <!doctype html>
@@ -19,7 +46,7 @@ require 'player.php';
     <title>blackjack</title>
 </head>
 <body>
-<form>
+<form action="index.php" method="post" >
     <button type="button" name="hit">hit</button>
     <button type="button" name="stand">stand</button>
     <button type="button" name="surrender">surrender</button>
