@@ -6,10 +6,10 @@ class Blackjack {
     private $dealer;
     private $deck;
 
-    private function getPlayer(){
+    public function getPlayer(){
 
     }
-    private function setPlayer(){
+    public function setPlayer(){
 
     }
 
