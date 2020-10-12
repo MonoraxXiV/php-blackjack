@@ -19,12 +19,13 @@ class Blackjack {
     public function __construct($player, $dealer)
     {
 
-        //$this->player= new Player;
-        $this->player=$player;
-        //$this->dealer= new Player;
-        $this->dealer=$dealer;
+        // old attempt at Instantiate
+        //$this->player=$player;
+        //$this->dealer=$dealer;
         $deck=new Deck();
         $deck->shuffle();
+        $this->player= new Player($deck);
+        $this->dealer= new Player($deck);
     }
 
 }
