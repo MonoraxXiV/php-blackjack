@@ -17,28 +17,31 @@ session_start();
 
 
 
-if (isset($blackjack)){
-    $_SESSION['blackjackSes']=$blackjack;
+if (!isset($blackjack)) {
+    $_SESSION['blackjackSes'] = new Blackjack();
 }
+$player=$_SESSION['blackjackSes']->getPlayer();
+$dealer=$_SESSION['blackjackSes']->getDealer();
+$deck=$_SESSION['blackjackSes']->getDeck();
 //initializing all the game components?
 
     $blackjack= new Blackjack();
-    $player1=$blackjack->getPlayer();
-    $dealer1=$blackjack->getDealer();
+
+
 //argument problem, missing $deck in parameters
 
 
 //checking for posts
-if (isset ($_POST['hit'])){
-    var_dump($player1->hit());
-}
-
-if (isset ($_POST['stand'])){
-    var_dump($dealer1->hit());
-}
-
-if (isset ($_POST['surrender'])){
-
+if (!isset ($_POST['hit'])&& (!isset($_POST['stand']))&&(!isset ($_POST['surrender']))){
+    echo "the game begins";
+}elseif (isset ($_POST['hit'])){
+    var_dump($player->hit($deck));
+}elseif (isset ($_POST['stand'])){
+    // if ($dealer1->getScore()<15 {
+    var_dump($dealer->hit($deck));
+    //}
+}elseif (isset ($_POST['surrender'])){
+    $player->surrender();
 }
 
 ?>
