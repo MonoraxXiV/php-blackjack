@@ -9,10 +9,10 @@ class Blackjack {
 
 
     public function getPlayer(){
-
+    return $this->player;
     }
     public function getDealer(){
-
+    return $this->dealer;
     }
     public function __construct()
     {
