@@ -38,12 +38,17 @@ class Player
 
 
     }
+
+    if ($score >21){
+        $this->lost=true;
+
+    }
         return $score;
     }
 
     public function hasLost()
     {
-          $this->lost=true;
+          return $this->lost;
 
 
     }
