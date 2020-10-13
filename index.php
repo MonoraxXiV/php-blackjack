@@ -17,31 +17,44 @@ session_start();
 
 
 
-if (!isset($blackjack)) {
+if (!isset($_SESSION['blackjackSes'])) {
     $_SESSION['blackjackSes'] = new Blackjack();
 }
-$player=$_SESSION['blackjackSes']->getPlayer();
-$dealer=$_SESSION['blackjackSes']->getDealer();
-$deck=$_SESSION['blackjackSes']->getDeck();
+    $game=$_SESSION['blackjackSes'];
+
+$player=$game->getPlayer();
+$dealer=$game->getDealer();
+$deck=$game->getDeck();
 //initializing all the game components?
 
-    $blackjack= new Blackjack();
+
 
 
 //argument problem, missing $deck in parameters
 
 
 //checking for posts
-if (!isset ($_POST['hit'])&& (!isset($_POST['stand']))&&(!isset ($_POST['surrender']))){
+if (!isset ($_POST['action'])){
     echo "the game begins";
-}elseif (isset ($_POST['hit'])){
-    var_dump($player->hit($deck));
-}elseif (isset ($_POST['stand'])){
+    var_dump($player);
+}elseif ( ($_POST['action'])==='hit'){
+        $player->hit($deck);
+        //currently shows the value of the first card only
+
+        var_dump($player);
+        echo "your points: ".$player->getScore()."</br>";
+        if($player->hasLost()===true){
+            echo "you lost";
+            session_unset();
+        }
+
+}elseif ($_POST['action']==='stand'){
     // if ($dealer1->getScore()<15 {
-    var_dump($dealer->hit($deck));
+    //var_dump($dealer->hit($deck));
     //}
-}elseif (isset ($_POST['surrender'])){
+}elseif ( $_POST['action']==='surrender'){
     $player->surrender();
+    echo "player has surrendered, dealer wins";
 }
 
 ?>
@@ -58,9 +71,9 @@ if (!isset ($_POST['hit'])&& (!isset($_POST['stand']))&&(!isset ($_POST['surrend
 <body>
 
 <form action="index.php" method="post" >
-    <input type="submit" name="hit" value="hit" >
-    <input type="submit" name="stand" value="stand">
-    <input type="submit" name="surrender" value="surrender">
+    <input type="submit" name="action" value="hit" >
+    <input type="submit" name="action" value="stand">
+    <input type="submit" name="action" value="surrender">
 
 </form>
 
