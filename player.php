@@ -25,7 +25,7 @@ class Player
 
     public function surrender()
     {
-        return $lost = true;
+        return $this->lost = true;
 
     }
 
@@ -34,7 +34,7 @@ class Player
     foreach ($this->cards AS $card){
 
        $score+=$card->getValue();
-        //echo $card->getUnicodeCharacter(true);
+        echo $card->getUnicodeCharacter(true);
 
 
     }
@@ -42,6 +42,9 @@ class Player
     if ($score >21){
         $this->lost=true;
 
+    }
+    if($score==21){
+        echo "you won! ";
     }
         return $score;
     }

@@ -55,6 +55,9 @@ if (!isset ($_POST['action'])){
 }elseif ( $_POST['action']==='surrender'){
     $player->surrender();
     echo "player has surrendered, dealer wins";
+    if($player->hasLost()===true){
+        session_unset();
+    }
 }
 
 ?>
