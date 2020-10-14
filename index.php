@@ -6,6 +6,7 @@ require 'Deck.php';
 require 'player.php';
 require 'Suit.php';
 require 'Card.php';
+require 'Dealer.php';
 
 ini_set('display_errors', '1');
 
@@ -36,12 +37,12 @@ $deck=$game->getDeck();
 //checking for posts
 if (!isset ($_POST['action'])){
     echo "the game begins";
-    var_dump($player);
+    //var_dump($player);
 }elseif ( ($_POST['action'])==='hit'){
         $player->hit($deck);
         //currently shows the value of the first card only
 
-        var_dump($player);
+        //var_dump($player);
         echo "your points: ".$player->getScore()."</br>";
         if($player->hasLost()===true){
             echo "you lost";
@@ -50,7 +51,7 @@ if (!isset ($_POST['action'])){
 
 }elseif ($_POST['action']==='stand'){
     // if ($dealer1->getScore()<15 {
-    //var_dump($dealer->hit($deck));
+   $dealer->hit($deck);
     //}
 }elseif ( $_POST['action']==='surrender'){
     $player->surrender();
@@ -59,6 +60,12 @@ if (!isset ($_POST['action'])){
         session_unset();
     }
 }
+
+if ($dealer->getScore()>21 && $player->hasLost()==false){
+    $dealer->hasLost();
+    echo "the dealer lost";
+}
+
 
 ?>
 <!doctype html>
@@ -72,13 +79,32 @@ if (!isset ($_POST['action'])){
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
-
+<?php echo"Your score: " .$player->getScore() ?>
+<?php echo "Dealer's score: ".$dealer->getScore() ?>
 <form action="index.php" method="post" >
     <input type="submit" name="action" value="hit" >
     <input type="submit" name="action" value="stand">
     <input type="submit" name="action" value="surrender">
-
 </form>
+<div class="h1">
+    <?php
+    echo "player cards: ".'<br>';
+    foreach($player->getCards() AS $card) {
+        echo $card->getUnicodeCharacter(true);
+
+    }
+    ?>
+</div>
+
+<div class="h1">
+<?php
+echo "dealer cards: ".'<br>';
+foreach($dealer->getCards() AS $card) {
+    echo $card->getUnicodeCharacter(true);
+
+}
+?>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
